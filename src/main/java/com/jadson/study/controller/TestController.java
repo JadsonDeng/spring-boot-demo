@@ -1,6 +1,7 @@
 package com.jadson.study.controller;
 
 import com.jadson.study.config.dynamicds.DataSourceContext;
+import com.jadson.study.dao.UserDao;
 import com.jadson.study.mapper.UserMapper;
 import com.jadson.study.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,20 +42,29 @@ public class TestController {
 
 
     // 多数据源
+    @Autowired
+    private UserDao userDao;
     @GetMapping("/test/master")
     public List<User> testMaster() {
         DataSourceContext.setDataSource("master");
-        return userMapper.selectList();
+        return userDao.selectListReadOnly();
     }
 
     @GetMapping("/test/slave")
     public List<User> testSlave() {
         DataSourceContext.setDataSource("slave");
-        return userMapper.selectList();
+        return userDao.selectListReadOnly();
     }
 
     @GetMapping("/test/default")
     public List<User> testDefault() {
-        return userMapper.selectList();
+        return userDao.selectListReadOnly();
+    }
+
+    // exception测试
+    @GetMapping("/test/exception")
+    public String testException() {
+        int a = 1 / 0;
+        return "ok";
     }
 }
