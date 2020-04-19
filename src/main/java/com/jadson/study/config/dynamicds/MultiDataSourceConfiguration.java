@@ -1,6 +1,11 @@
 package com.jadson.study.config.dynamicds;
 
-import com.zaxxer.hikari.HikariDataSource;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.sql.DataSource;
+
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,10 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
-import javax.sql.DataSource;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import com.zaxxer.hikari.HikariDataSource;
 
 /**
  * 多数据源自动切换配置
@@ -32,7 +34,7 @@ public class MultiDataSourceConfiguration {
     public DataSource masterDataSource() {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3307/demo_master?useUnicode=true&characterEncoding=utf8&useSSL=true");
+        dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3406/demo?useUnicode=true&characterEncoding=utf8&useSSL=true");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
@@ -42,12 +44,11 @@ public class MultiDataSourceConfiguration {
     public DataSource slaveDataSource() {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3307/demo_slave?useUnicode=true&characterEncoding=utf8&useSSL=true");
+        dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1:3407/demo?useUnicode=true&characterEncoding=utf8&useSSL=true");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
         return dataSource;
     }
-
     @Primary
     @Bean
     public DynamicDataSourceRouting dynamicDataSource() {
@@ -57,8 +58,10 @@ public class MultiDataSourceConfiguration {
         targetDataSources.put("slave", slaveDataSource());
         dynamicDataSource.setTargetDataSources(targetDataSources);
         dynamicDataSource.setDefaultTargetDataSource(masterDataSource());
+        dynamicDataSource.afterPropertiesSet();
         return dynamicDataSource;
     }
+
 
     @Bean
     public DataSourceTransactionManager transactionManager(@Qualifier("dynamicDataSource") DynamicDataSourceRouting dynamicDataSource) {
@@ -77,10 +80,11 @@ public class MultiDataSourceConfiguration {
     }
 
     @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
+    public MapperScannerConfigurer mapperScannerConfigurer() throws Exception {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setBasePackage("com.jadson.study.mapper");
+        mapperScannerConfigurer.afterPropertiesSet();
         return mapperScannerConfigurer;
     }
 
