@@ -29,6 +29,7 @@
         <module>spring-boot-eureka-server</module>
         <module>spring-boot-grpc-client</module>
         <module>spring-boot-grpc-server</module>
+        <module>spring-boot-rocketmq</module>
     </modules>
 
     <dependencyManagement>
@@ -55,6 +56,8 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- grpc -->
             <dependency>
                 <groupId>net.devh</groupId>
                 <artifactId>grpc-client-spring-boot-starter</artifactId>
@@ -89,8 +92,10 @@
                 <version>${protobuf.plugin.version}</version>
                 <configuration>
                     <pluginId>grpc-java</pluginId>
-                    <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}</protocArtifact>
-                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                    <protocArtifact>com.google.protobuf:protoc:${protoc.version}:exe:${os.detected.classifier}
+                    </protocArtifact>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+                    </pluginArtifact>
                     <!-- proto文件 -->
                     <protoSourceRoot>${basedir}/src/main/proto</protoSourceRoot>
                     <!-- 输出路径 -->
