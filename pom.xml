@@ -31,6 +31,7 @@
         <module>spring-boot-grpc-server</module>
         <module>spring-boot-rocketmq</module>
         <module>spring-boo-xxl-job</module>
+        <module>spring-boot-liteflow</module>
     </modules>
 
     <dependencyManagement>
