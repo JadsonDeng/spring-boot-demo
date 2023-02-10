@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static com.jadson.study.Constants.*;
@@ -33,12 +34,16 @@ public class RocketmqConsumer {
 
                 System.out.println("消费者启动成功...");
                 while (true) {
+                    if (!consumer.isRunning()) {
+                        log.info("消费者停止");
+                        return;
+                    }
                     List<MessageExt> list = consumer.poll(1000L);
                     if (list == null || list.size() == 0) {
                         continue;
                     }
                     for (MessageExt message : list) {
-                        log.info("消费到数据：" + new String(message.getBody(), Charset.defaultCharset()));
+                        log.info("消费到数据：" + new String(message.getBody(), StandardCharsets.UTF_8));
                         log.info("topic: " + message.getTopic());
                         log.info("tags: " + message.getTags());
                         log.info("queId: " + message.getQueueId());
