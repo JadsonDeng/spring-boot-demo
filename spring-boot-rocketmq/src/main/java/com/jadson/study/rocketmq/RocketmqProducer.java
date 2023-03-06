@@ -39,6 +39,7 @@ public class RocketmqProducer {
         message.setTopic(TOPIC);
         message.setBody(content.getBytes(StandardCharsets.UTF_8));
         message.setTags("tag");
+        message.setDelayTimeLevel(3);
         this.producer.send(message, new SendCallback() {
             @Override
             public void onSuccess(SendResult sendResult) {
