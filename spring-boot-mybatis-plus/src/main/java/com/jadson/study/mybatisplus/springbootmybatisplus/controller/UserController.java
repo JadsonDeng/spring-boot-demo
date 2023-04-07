@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * @author dengjunzhen@hualala.com
+ * @author dengjunzhen
  * @date 2023-03-22 16:16
  * @since 1.0
  */
