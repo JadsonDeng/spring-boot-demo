@@ -7,7 +7,6 @@
         <artifactId>spring-boot-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.jadson.study</groupId>
     <artifactId>spring-boot-sa-token</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-boot-sa-token</name>

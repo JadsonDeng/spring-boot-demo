@@ -25,6 +25,8 @@
         <grpc.starter.version>2.12.0.RELEASE</grpc.starter.version>
         <sa-token-spring-boot-starter.version>1.34.0</sa-token-spring-boot-starter.version>
         <spring-boot-starter-security.version>2.7.8</spring-boot-starter-security.version>
+        <mybatis-plus-boot-starter.version>3.5.2</mybatis-plus-boot-starter.version>
+        <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
     </properties>
 
     <modules>
@@ -35,6 +37,7 @@
         <module>spring-boot-sa-token</module>
         <module>spring-boot-security</module>
         <module>spring-boot-sa-token-demo</module>
+        <module>spring-boot-mybatis-plus</module>
     </modules>
 
     <dependencyManagement>
@@ -87,6 +90,17 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${spring-boot-starter-security.version}</version>
+            </dependency>
+            <!-- mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
