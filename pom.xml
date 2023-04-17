@@ -27,6 +27,7 @@
         <spring-boot-starter-security.version>2.7.8</spring-boot-starter-security.version>
         <mybatis-plus-boot-starter.version>3.5.2</mybatis-plus-boot-starter.version>
         <mysql-connector-java.version>5.1.47</mysql-connector-java.version>
+        <spring-boot-starter-websocket.version>2.5.14</spring-boot-starter-websocket.version>
     </properties>
 
     <modules>
@@ -38,6 +39,7 @@
         <module>spring-boot-security</module>
         <module>spring-boot-sa-token-demo</module>
         <module>spring-boot-mybatis-plus</module>
+        <module>spring-boot-websocket</module>
     </modules>
 
     <dependencyManagement>
@@ -101,6 +103,13 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <!-- spring websocket -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-websocket</artifactId>
+                <version>${spring-boot-starter-websocket.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
