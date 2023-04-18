@@ -1,6 +1,5 @@
 package com.jadson.study.method2.config;
 
-import cn.hutool.http.HttpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 

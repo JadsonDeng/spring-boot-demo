@@ -10,6 +10,8 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
 import javax.annotation.Resource;
 
 /**
+ * websocket配置信息
+ *
  * @author dengjunzhen
  * @date 2023-04-17 17:05
  * @since 1.0
@@ -25,8 +27,8 @@ public class WebSocketConfig2 implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(this.defaultWebSocketHandler, "/ws")
-                .addInterceptors(defaultHandshakeInterceptor)
-                .setAllowedOrigins("*");
+        registry.addHandler(this.defaultWebSocketHandler, "/ws") // 添加handler
+                .addInterceptors(defaultHandshakeInterceptor) // 添加拦截器
+                .setAllowedOrigins("*"); // 允许跨域
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.Map;
 
 /**
+ * websocket的handler，针对不同事件进行处理
+ *
  * @author dengjunzhen
  * @date 2023-04-17 17:05
  * @since 1.0
@@ -46,7 +48,7 @@ public class DefaultWebSocketHandler extends TextWebSocketHandler {
         log.info("接收到消息");
         // TODO 每次都需要校验一下token是否有效
         WebSocketMessage value = JSON.parseObject(message.getPayload(), WebSocketMessage.class);
-                // 发消息发送给所有在线的用户
+        // 发消息发送给所有在线的用户
         for (Map.Entry<String, WebSocketSession> entry : UserSessionHolder.getAllSession().entrySet()) {
             if (session.getAttributes().get("token").equals(entry.getKey())) {
                 // 如果发送者和接受目标是同一个人，则前缀是”我“
